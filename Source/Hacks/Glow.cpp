@@ -167,16 +167,16 @@ static bool glowWindowOpen = false;
 
 void Glow::menuBarItem() noexcept
 {
-    if (ImGui::MenuItem("Glow")) {
+    if (ImGui::MenuItem("发光功能")) {
         glowWindowOpen = true;
-        ImGui::SetWindowFocus("Glow");
-        ImGui::SetWindowPos("Glow", { 100.0f, 100.0f });
+        ImGui::SetWindowFocus("发光功能");
+        ImGui::SetWindowPos("发光功能", { 100.0f, 100.0f });
     }
 }
 
 void Glow::tabItem() noexcept
 {
-    if (ImGui::BeginTabItem("Glow")) {
+    if (ImGui::BeginTabItem("发光功能")) {
         drawGUI(true);
         ImGui::EndTabItem();
     }
@@ -188,11 +188,11 @@ void Glow::drawGUI(bool contentOnly) noexcept
         if (!glowWindowOpen)
             return;
         ImGui::SetNextWindowSize({ 450.0f, 0.0f });
-        ImGui::Begin("Glow", &glowWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+        ImGui::Begin("发光功能", &glowWindowOpen, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
     }
 
-    ImGui::hotkey("Toggle Key", glowToggleKey, 80.0f);
-    ImGui::hotkey("Hold Key", glowHoldKey, 80.0f);
+    ImGui::hotkey("切换键", glowToggleKey, 80.0f);
+    ImGui::hotkey("按住键", glowHoldKey, 80.0f);
     ImGui::Separator();
 
     static int currentCategory{ 0 };
