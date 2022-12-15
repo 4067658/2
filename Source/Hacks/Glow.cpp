@@ -199,14 +199,15 @@ void Glow::drawGUI(bool contentOnly) noexcept
     ImGui::PushItemWidth(110.0f);
     ImGui::PushID(0);
     constexpr std::array categories{ "队友", "敌人", "下包", "拆除", "本地玩家", "武器", "C4", "已经安放的C4", "小鸡", "拆弹器", "投掷物", "人质", "布娃娃" };
-    ImGui::Combo("", &currentCategory, categories.data(), categories.size());
+    constexpr std::array categoriesQS{ "队友", "敌人", "下包", "拆除", "本地玩家", "武器", "C4", "已经安放的C4", "小鸡", "拆弹器", "投掷物", "人质", "布娃娃" };
+    ImGui::Combo("", &currentCategory, categoriesQS.data(), categoriesQS.size());
     ImGui::PopID();
     GlowItem* currentItem;
     if (currentCategory <= 3) {
         ImGui::SameLine();
         static int currentType{ 0 };
         ImGui::PushID(1);
-        ImGui::Combo("", &currentType, "All\0Visible\0Occluded\0");
+        ImGui::Combo("", &currentType, "全部\0可见的\0遮挡的\0");
         ImGui::PopID();
         auto& cfg = playerGlowConfig[categories[currentCategory]];
         switch (currentType) {
@@ -219,17 +220,17 @@ void Glow::drawGUI(bool contentOnly) noexcept
     }
 
     ImGui::SameLine();
-    ImGui::Checkbox("Enabled", &currentItem->enabled);
+    ImGui::Checkbox("启用", &currentItem->enabled);
     ImGui::Separator();
     ImGui::Columns(2, nullptr, false);
     ImGui::SetColumnOffset(1, 150.0f);
-    ImGui::Checkbox("Health based", &currentItem->healthBased);
+    ImGui::Checkbox("基于血量", &currentItem->healthBased);
 
-    ImGuiCustom::colorPicker("Color", *currentItem);
+    ImGuiCustom::colorPicker("颜色", *currentItem);
 
     ImGui::NextColumn();
     ImGui::SetNextItemWidth(100.0f);
-    ImGui::Combo("Style", &currentItem->style, "Default\0Rim3d\0Edge\0Edge Pulse\0");
+    ImGui::Combo("风格", &currentItem->style, "默认\0边缘3D\0边缘\0边缘脉冲\0");
 
     ImGui::Columns(1);
     if (!contentOnly)
